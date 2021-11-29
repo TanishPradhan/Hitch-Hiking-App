@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hitch_hiking/data/user_dao.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -8,6 +10,9 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  late UserDao userDao;
+  User? user = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,6 +45,9 @@ class _ProfileState extends State<Profile> {
                   child: CircleAvatar(
                     backgroundColor: Colors.white30,
                     radius: 50.0,
+                    backgroundImage: (user!.photoURL == null)
+                        ? null
+                        : NetworkImage(user!.photoURL.toString()),
                   ),
                 ),
                 SizedBox(
@@ -57,9 +65,10 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       TextFormField(
+                        initialValue: user!.displayName,
                         decoration: InputDecoration(
                           filled: true,
-                          hintText: 'Enter here',
+                          // hintText: user!.displayName,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white),
                             borderRadius: BorderRadius.circular(5),
@@ -92,6 +101,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       TextFormField(
+                        initialValue: user!.phoneNumber,
                         decoration: InputDecoration(
                           filled: true,
                           hintText: 'Enter here',
@@ -127,6 +137,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       TextFormField(
+                        initialValue: user!.email,
                         decoration: InputDecoration(
                           filled: true,
                           hintText: 'Enter here',

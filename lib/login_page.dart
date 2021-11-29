@@ -1,5 +1,9 @@
+import 'dart:ui';
+import 'package:provider/provider.dart';
+
+import '../data/user_dao.dart';
 import 'package:flutter/material.dart';
-import 'package:hitch_hiking/homepage.dart';
+import 'package:hitch_hiking/home_page/homepage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,8 +13,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final userDao = Provider.of<UserDao>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -67,6 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       )),
+                  controller: emailController,
                 ),
                 SizedBox(
                   height: 20.0,
@@ -81,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                       focusedBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.green),
                       )),
+                  controller: passwordController,
                   obscureText: true,
                 ),
                 SizedBox(
@@ -103,20 +113,18 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 40.0,
                 ),
-                Container(
-                  height: 40.0,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(20),
-                    shadowColor: Colors.blueAccent,
-                    color: Colors.blue,
-                    elevation: 7.0,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomePage()));
-                      },
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  },
+                  child: Container(
+                    height: 40.0,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(20),
+                      shadowColor: Colors.blueAccent,
+                      color: Colors.blue,
+                      elevation: 7.0,
                       child: Center(
                         child: Text(
                           "Login",
@@ -130,38 +138,40 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 20.0,
                 ),
-                Container(
-                  height: 40.0,
-                  color: Colors.transparent,
+                GestureDetector(
+                  onTap: () {
+                    userDao.googleLogin(
+                        emailController.text, passwordController.text);
+                  },
                   child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black,
-                          style: BorderStyle.solid,
-                          width: 1.0,
-                        ),
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(20.0)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: Icon(Icons.https),
-
-                          // child:ImageIcon(AssetImage("google.png"),
-                          //size:20),
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Center(
-                            child: Text(
-                          "Login With Google",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                    height: 40.0,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(20),
+                      shadowColor: Colors.black,
+                      elevation: 7.0,
+                      child: Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            userDao.googleLogin(
+                                emailController.text, passwordController.text);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(Icons.https),
+                              TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'Login With Google',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ))
-                      ],
+                        ),
+                      ),
                     ),
                   ),
                 )

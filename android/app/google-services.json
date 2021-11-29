@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "874138869890",
+    "project_id": "hitch-hiking-app",
+    "storage_bucket": "hitch-hiking-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874138869890:android:b64fdaf3ada5e53d75149b",
+        "android_client_info": {
+          "package_name": "com.example.hitch_hiking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "874138869890-mjnib3hna3vrtmvc6f38i6oqll7ap40d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hitch_hiking",
+            "certificate_hash": "432e5487604b463089322c030b5ea94b3cff8483"
+          }
+        },
+        {
+          "client_id": "874138869890-ud9dri2gcc7i6i2663dq81egm6r1vl0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaFr30A5XleCAYrwDQRs40IL_lqhE7ZA8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "874138869890-ud9dri2gcc7i6i2663dq81egm6r1vl0u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
